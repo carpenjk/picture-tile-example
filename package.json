@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "@carpenjk/popup-modal": "git+https://git@github.com/carpenjk/popup-modal.git",
+    "@carpenjk/prop-x": "^2.0.2",
+    "@carpenjk/themeweaver": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "styled-components": "^5.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",

@@ -1,14 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import PopupModal from '../base/PopupModal';
-import { useRef } from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
+import TestComponent from './TestComponent';
 
 
 function App() {
-  const scrollRef = useRef();
+  
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
-      <header ref={scrollRef} className="App-header">
+      <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -19,11 +21,12 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <PopupModal isOpen={true} scrollNode={scrollRef} lockScroll />
           Learn React
         </a>
       </header>
+      <TestComponent/>
     </div>
+    </ThemeProvider>
   );
 }
 
