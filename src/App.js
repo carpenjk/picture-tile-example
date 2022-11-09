@@ -44,6 +44,7 @@ function App() {
               ),
             }}
           />
+          <p style={{ marginTop: '32px' }}>Try resizing the window to see responsive properties in effect</p>
         </StyledPictureTileWrapper>
         <Lightbox
           imgCount={images.length}
@@ -51,6 +52,7 @@ function App() {
           lightboxControl={lightboxControl}
           lightboxState={lightboxState}
         />
+
       </main>
     </ThemeProvider>
   );
