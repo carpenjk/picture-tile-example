@@ -1,5 +1,5 @@
 import { lightboxSrcSetParams, lightboxSrcParams } from './lightbox';
-import { singleImageParams, smallParams, largeParams } from './pictureTiles';
+import { singleImageParams, smallParams } from './pictureTiles';
 
 export function createUrlWithParams(url, params) {
   if (!params) return url;
@@ -11,48 +11,39 @@ export function createUrlWithParams(url, params) {
   );
 }
 
-export function getImagesWithProps(images) {
-  return (images.map((img, i) => {
-    const { url, ...remProps } = img;
-    if (i === 0) {
-      const { rowSpan, colSpan, ...srcParams } = largeParams;
-      return {
-        src: createUrlWithParams(url, srcParams),
-        width: srcParams.w,
-        height: srcParams.h,
-        rowSpan,
-        colSpan,
-        ...remProps,
-      };
-    }
-    const { rowSpan, colSpan, ...srcParams } = smallParams;
+export function getPictureTileImages(images) {
+  function getFirstImageProps(url, img, remProps) {
+    return {
+      src: createUrlWithParams(url, singleImageParams),
+      srcSet: `${createUrlWithParams(img.url, { ...singleImageParams, w: 480, h: 320 })} 480w, ${createUrlWithParams(img.url, { ...singleImageParams, w: 880, h: 587 })} 880w`,
+      width: singleImageParams.w,
+      height: singleImageParams.h,
+      rowSpan: 2,
+      colSpan: 2,
+      ...remProps,
+    };
+  }
+
+  function getRemImageProps(url, srcParams, img, rowSpan, colSpan, remProps) {
     return {
       src: createUrlWithParams(url, srcParams),
       width: srcParams.w,
       height: srcParams.h,
       rowSpan,
       colSpan,
+      hide: [true, false],
       ...remProps,
     };
-  }));
-}
+  }
 
-export function getPictureTileImages(images) {
-  return (
-    [
-      [
-        {
-          src: createUrlWithParams(images[0].url, singleImageParams),
-          srcSet: `${createUrlWithParams(images[0].url, { ...singleImageParams, w: 480, h: 320 })} 480w, ${createUrlWithParams(images[0].url, { ...singleImageParams, w: 880, h: 587 })} 880w`,
-          alt: images[0].alt,
-          width: singleImageParams.w,
-          height: singleImageParams.h,
-          rowSpan: 1,
-          colSpan: 1,
-        },
-      ],
-      getImagesWithProps(images),
-    ]);
+  return (images.map((img, i) => {
+    const { url, ...remProps } = img;
+    const { rowSpan, colSpan, ...srcParams } = smallParams;
+    if (i === 0) {
+      return getFirstImageProps(url, img, remProps);
+    }
+    return getRemImageProps(url, srcParams, img, rowSpan, colSpan, remProps);
+  }));
 }
 
 export function getLightboxImages(images) {

@@ -17,7 +17,6 @@ function App() {
     openToIndex: 0, // default = 0
     openOnMount: false, // default = false
   });
-
   return (
     <ThemeProvider theme={theme}>
       <header className="App-header" />
@@ -27,8 +26,8 @@ function App() {
           // all properties except overlayButton & onPhotoClick can take be given
           // values for each breakpoint
             images={getPictureTileImages(images)}
-            columns={['1', '4']}
-            minColWidth={['320px', '150px']}
+            columns={['2', '4']}
+            minColWidth={['0', '150px']}
             maxColWidth={['100%', '1fr']}
             rowHeight={['auto', '250px']} // use rowHeight or gridHeight
             gridWidth={['100%']}
