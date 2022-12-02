@@ -23,7 +23,7 @@ function App() {
       <main>
         <StyledPictureTileWrapper>
           <PictureTiles
-          // all properties except overlayButton & onPhotoClick can take be given
+          // all properties except images, overlayButton, & onPhotoClick can take be given
           // values for each breakpoint
             images={getPictureTileImages(images)}
             columns={['2', '4']}
